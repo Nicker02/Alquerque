@@ -88,7 +88,7 @@ def is_legal(m:Move,b:Board) -> bool:
         else:
             return False
 def attack(m:Move,b:Board) -> bool:
-    if white_plays and  not is_legal(m,b):
+    if white_plays(b) and  not is_legal(m,b):
         difference = m.src - m.trg
         if m.src % 2 == 0:
             if difference == 10 and (m.trg + 5) in b.black:
@@ -104,7 +104,7 @@ def attack(m:Move,b:Board) -> bool:
                 return True
             else:
                 return False
-    elif not white_plays and  not is_legal(m,b):
+    elif not white_plays(b) and  not is_legal(m,b):
         difference = m.trg - m.src
         if m.src % 2 == 0:
             if difference == 10 and (m.trg - 5) in b.white:
@@ -134,13 +134,13 @@ def legal_moves(b:Board) -> list[Move]:
      return legalmoves
 
 #def legal_move(b:Board) -> list[Move]:
-k = Move(13,23)
-j = Board([15,18,19],[1,2,3,4,9,8,10,11,12,13,14],[7,3,5,23,24])
+k = Move(13,24)
+j = Board([13,15,18,19],[1,2,3,4,9,8,10,11,12,14],[7,3,5,23,24])
 #print(23-13)
 print(target(k))
 print(is_legal(k,j))
 print(attack(k,j))
-#print(legal_moves(j))
+print(legal_moves(j))
 #print(white(make_board([1,2,3],[4,5,6,7],8))[2])
 #print(black(make_board([1,2,3],[4,5,6,7],8))[3])
 #print(empty(make_board([1,2,3],[4,5,6,7],8)))
