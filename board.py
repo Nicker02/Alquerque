@@ -37,23 +37,6 @@ def is_legal(m:Move,b:Board) -> bool:
                     return True
                 else:
                     return False
-        elif m.trg in b.black:
-            if m.src % 2 == 1:
-                diff = m.src - m.trg
-                if diff == 8:
-                    return True
-                elif diff == 10:
-                    return True
-                elif diff == 12:
-                    return True
-                else:
-                    return False
-            elif m.src % 2 == 0:
-                diff = m.src - m.trg
-                if diff == 10:
-                    return True
-                else:
-                    return False
     else:
         if m.trg in b.empty:
             if m.src % 2 == 0:
@@ -65,23 +48,6 @@ def is_legal(m:Move,b:Board) -> bool:
             elif m.src % 2 == 1:
                 diff = m.trg- m.src
                 if 6>= diff >= 4:
-                    return True
-                else:
-                    return False
-        elif m.trg//2 in b.white:
-            if m.src % 2 == 1:
-                diff = m.trg - m.src
-                if diff == 8:
-                    return True
-                elif diff == 10:
-                    return True
-                elif diff == 12:
-                    return True
-                else:
-                    return False
-            elif m.src % 2 == 0:
-                diff = m.trg - m.src
-                if diff == 10:
                     return True
                 else:
                     return False
@@ -125,17 +91,23 @@ def attack(m:Move,b:Board) -> bool:
 
 
 def legal_moves(b:Board) -> list[Move]: 
-     legalmoves = []
-     for src in b.white:
-         for trg in b.empty:
-             m = Move(src,trg)
-             if is_legal(m,b):
-                 legalmoves.append(m)
-     return legalmoves
+    legalmoves = []
+    for src in b.white:
+        for trg in b.empty:
+            m = Move(src,trg)
+            if is_legal(m,b):
+                legalmoves.append(m)
+    for src in b.black:
+        for trg in b.empty:
+            m = Move(src,trg)
+            if is_legal(m,b):
+                legalmoves.append(m)
+    return legalmoves
+
 
 #def legal_move(b:Board) -> list[Move]:
-k = Move(13,24)
-j = Board([13,15,18,19],[1,2,3,4,9,8,10,11,12,14],[7,3,5,23,24])
+k = Move(13,23)
+j = Board([15,18,19],[1,2,3,4,9,8,10,11,12,13,14],[7,3,5,23,24])
 #print(23-13)
 print(target(k))
 print(is_legal(k,j))
